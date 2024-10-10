@@ -74,15 +74,13 @@ BOARD_MKBOOTIMG_ARGS          += --pagesize $(BOARD_KERNEL_PAGESIZE)
 # Ramdisk use lz4
 BOARD_RAMDISK_USE_LZ4 := true
 
-# Partition Recovery
+# Partitions
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 104857600
 
-# Partition Super
+# Dynamic Partition
 BOARD_SUPER_PARTITION_SIZE := 9126805504
 BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
-
-# Partition Dynamic
-BOARD_XIAOMI_DYNAMIC_PARTITIONS_SIZE := 9122611200
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9122611200
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext product vendor vendor_dlkm odm
 
 BOARD_PARTITION_LIST := $(call to-upper, $(BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST))
@@ -153,16 +151,21 @@ TW_EXTRA_LANGUAGES := true
 TW_DEFAULT_BRIGHTNESS := 200
 TW_EXCLUDE_APEX := true
 TW_HAS_EDL_MODE := true
-
-# Haptic
-TW_SUPPORT_INPUT_AIDL_HAPTICS := true
-TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
-TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
 TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 
 #TW_NO_SCREEN_BLANK := true
-TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko goodix_ts.ko qti_battery_charger.ko"
+#TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko goodix_ts.ko qti_battery_charger.ko"
 TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone35/temp"
 TW_BATTERY_SYSFS_WAIT_SECONDS := 6
 TW_BACKUP_EXCLUSIONS := /data/fonts
-TW_DEVICE_VERSION := Poco_F6_Pro-A13
+TW_DEVICE_VERSION := Poco_F6_Pro-A14
+
+# Test
+#TW_NO_HAPTICS := true
+
+TW_SUPPORT_INPUT_AIDL_HAPTICS := false
+#TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
+TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := false
+
+# Load Touch modules files
+TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko msm_drm.ko goodix_ts.ko goodix_fod.ko nvmem_qfprom.ko pm8941-pwrkey.ko xiaomi_touch.ko msm_kgsl.ko qbt_handler.ko qti_battery_charger.ko"
